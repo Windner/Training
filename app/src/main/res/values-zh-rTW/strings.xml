@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">訓練</string>
     <string name="hello">哈囉 世界!</string>
+    <string name="lesson_one">第一堂</string>
 </resources>
