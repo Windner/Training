@@ -2,11 +2,12 @@ package com.example.candice_feng.training;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class Lesson1 extends AppCompatActivity {
-
+    private static final String TAG = Lesson1.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +32,31 @@ public class Lesson1 extends AppCompatActivity {
 
         //Set to content view
         setContentView(relativeLayout);
+
+        Log.i(TAG, "onCreate");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.i(TAG, "onPostResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy");
     }
 }

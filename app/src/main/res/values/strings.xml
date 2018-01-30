@@ -2,4 +2,10 @@
     <string name="app_name">Training</string>
     <string name="hello">Hello World!</string>
     <string name="lesson_one">Lesson One</string>
+    <string name="lesson_two">Lesson Two</string>
+    <string name="launch_camera">Launch Camera</string>
+    <string name="launch_phone">Launch Phone</string>
+    <string name="launch_intent">Launch Intent</string>
+    <string name="launch_activity">Launch Activity</string>
+    <string name="sum">SUM</string>
 </resources>

@@ -3,4 +3,10 @@
     <string name="app_name">訓練</string>
     <string name="hello">哈囉 世界!</string>
     <string name="lesson_one">第一堂</string>
+    <string name="lesson_two">第二堂</string>
+    <string name="launch_camera">啟動相機程式</string>
+    <string name="launch_phone">啟動電話</string>
+    <string name="launch_intent">啟動Intent</string>
+    <string name="launch_activity">啟動Activity</string>
+    <string name="sum">總和</string>
 </resources>
