@@ -8,4 +8,6 @@
     <string name="launch_intent">Launch Intent</string>
     <string name="launch_activity">Launch Activity</string>
     <string name="sum">SUM</string>
+    <string name="no_input">No Input</string>
+    <string name="back_forward">Back</string>
 </resources>

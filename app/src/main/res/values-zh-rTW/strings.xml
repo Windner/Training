@@ -9,4 +9,6 @@
     <string name="launch_intent">啟動Intent</string>
     <string name="launch_activity">啟動Activity</string>
     <string name="sum">總和</string>
+    <string name="no_input">輸入是空的</string>
+    <string name="back_forward">回上一頁</string>
 </resources>

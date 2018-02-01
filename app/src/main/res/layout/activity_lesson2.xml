@@ -91,12 +91,16 @@
                 android:text="@string/sum" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/launch_phone2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_row="0"
-                android:text="TextView" />
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18sp"
+                android:text="0988565169" />
         </GridLayout>
 
 
