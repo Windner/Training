@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class Lesson2_sum extends AppCompatActivity {
     private static final String TAG = Lesson2_sum.class.getSimpleName();
+    public static final String VALUES_KEY = "values";
+    public static final String RESULT_KEY = "result";
     private TextView sumTv;
     private Button backBtn;
 
@@ -27,7 +29,7 @@ public class Lesson2_sum extends AppCompatActivity {
 
         //Get input values and calculate
         Intent intent = getIntent();
-        String[] values = intent.getStringArrayExtra("values");
+        String[] values = intent.getStringArrayExtra(VALUES_KEY);
         if (values != null)
             result = getResult(values);
 
@@ -40,8 +42,9 @@ public class Lesson2_sum extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("result", sumTv.getText().toString());
+                resultIntent.putExtra(RESULT_KEY, sumTv.getText().toString());
                 setResult(Activity.RESULT_OK, resultIntent);
+                Log.d(TAG, "End SecondActivity");
                 finish();
             }
         });
@@ -68,6 +71,18 @@ public class Lesson2_sum extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
     }
 
     @Override

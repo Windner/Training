@@ -58,8 +58,17 @@ public class Lesson2 extends AppCompatActivity {
 
                 //create intent and start activity
                 Intent intent = new Intent(Lesson2.this, Lesson2_sum.class);
-                intent.putExtra("values", values);
+                intent.putExtra(Lesson2_sum.VALUES_KEY, values);
                 startActivityForResult(intent, SUM_ACTIVITY_REQUEST);
+            }
+        });
+
+        //homework 2.2
+        final Button hw2_2 = findViewById(R.id.hw2_2Btn);
+        hw2_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Lesson2.this, Lesson2_2.class));
             }
         });
     }
@@ -69,9 +78,14 @@ public class Lesson2 extends AppCompatActivity {
         Log.i(TAG, "onActivityResult");
         if (requestCode == SUM_ACTIVITY_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, getString(R.string.sum) + " : " + data.getStringExtra("result"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.sum) + " : " + data.getStringExtra(Lesson2_sum.RESULT_KEY), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -84,6 +98,18 @@ public class Lesson2 extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
     }
 
     @Override

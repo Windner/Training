@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Lesson1" />
-        <activity android:name=".Lesson2"></activity>
-        <activity android:name=".Lesson2_sum"></activity>
+        <activity android:name=".Lesson2" />
+        <activity android:name=".Lesson2_sum" />
+        <activity android:name=".Lesson2_2"></activity>
     </application>
 
 </manifest>

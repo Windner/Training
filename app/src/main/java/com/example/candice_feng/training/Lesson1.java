@@ -49,6 +49,18 @@ public class Lesson1 extends AppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         Log.i(TAG, "onStop");

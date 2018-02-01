@@ -10,4 +10,7 @@
     <string name="sum">SUM</string>
     <string name="no_input">No Input</string>
     <string name="back_forward">Back</string>
+    <string name="count">Count</string>
+    <string name="save_state">Save State</string>
+    <string name="hw_2_2">HoweWork 2.2</string>
 </resources>
