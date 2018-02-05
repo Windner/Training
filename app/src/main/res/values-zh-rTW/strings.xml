@@ -16,4 +16,5 @@
     <string name="hw_2_2">作業 2.2</string>
     <string name="lesson_three">第三堂</string>
     <string name="anr_button_text">ANR</string>
+    <string name="map_button_text">地圖</string>
 </resources>

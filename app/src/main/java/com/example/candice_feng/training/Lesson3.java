@@ -1,7 +1,7 @@
 package com.example.candice_feng.training;
 
+
 import android.content.Intent;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class Lesson3 extends AppCompatActivity {
     private static final String TAG = Lesson3.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,13 @@ public class Lesson3 extends AppCompatActivity {
             }
         });
 
+        final Button mapButton = findViewById(R.id.launchMap);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Lesson3.this, Lesson3_map.class));
+            }
+        });
     }
 
 
