@@ -14,4 +14,6 @@
     <string name="count">增加</string>
     <string name="save_state">保留狀態</string>
     <string name="hw_2_2">作業 2.2</string>
+    <string name="lesson_three">第三堂</string>
+    <string name="anr_button_text">ANR</string>
 </resources>
