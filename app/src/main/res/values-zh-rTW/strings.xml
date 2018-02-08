@@ -17,4 +17,20 @@
     <string name="lesson_three">第三堂</string>
     <string name="anr_button_text">ANR</string>
     <string name="map_button_text">地圖</string>
+    <string name="title_activity_lesson3_map">地圖</string>
+    <string name="lesson_four">第四堂</string>
+    <string name="checkbox1_text">"巧克力醬 "</string>
+    <string name="checkbox2_text">彩糖</string>
+    <string name="checkbox3_text">碎堅果</string>
+    <string name="checkbox4_text">櫻桃</string>
+    <string name="checkbox5_text">Orio 餅乾碎片</string>
+    <string name="show_toast_btn_text">顯示提示</string>
+    <string name="hw4_1_btn_text">作業 4.1</string>
+    <string name="hw4_2_btn_text">作業 4.2</string>
+    <string name="hw4_4_btn_text">作業 4.4</string>
+    <string name="hw4_3_text">作業 4.3</string>
+    <string name="topping">甜品醬:</string>
+    <string name="edit">編輯</string>
+    <string name="share">分享</string>
+    <string name="delete">刪除</string>
 </resources>

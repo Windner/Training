@@ -40,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Lesson3.class));
             }
         });
+
+        final Button lesson4_btn = findViewById(R.id.lesson_four_btn);
+        lesson4_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lesson4.class));
+            }
+        });
         Log.i(TAG, "onCreate");
     }
 

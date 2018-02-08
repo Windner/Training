@@ -17,6 +17,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -49,6 +50,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.candice_feng.training.Lesson3" />
         </activity>
+        <activity
+            android:name=".Lesson4"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Lesson4_sub.HomeWork_4_1"
+            android:parentActivityName=".Lesson4" />
+        <activity
+            android:name=".Lesson4_sub.HomeWork_4_2"
+            android:parentActivityName=".Lesson4" />
+        <activity
+            android:name=".Lesson4_sub.orderDonut"
+            android:parentActivityName=".Lesson4" />
+        <activity
+            android:name=".Lesson4_sub.orderFroyo"
+            android:parentActivityName=".Lesson4" />
+        <activity
+            android:name=".Lesson4_sub.orderIcecream"
+            android:parentActivityName=".Lesson4" />
+        <activity android:name=".Lesson4_sub.HomeWork_4_4"></activity>
     </application>
 
 </manifest>
