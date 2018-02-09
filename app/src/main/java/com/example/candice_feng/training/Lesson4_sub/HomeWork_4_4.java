@@ -1,5 +1,7 @@
 package com.example.candice_feng.training.Lesson4_sub;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.candice_feng.training.Model.Recipe;
 import com.example.candice_feng.training.R;
@@ -55,6 +58,10 @@ public class HomeWork_4_4 extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+    }
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         private String API_URL = "http://food2fork.com/api/search";
         private String API_KEY = "3ddc7a65c38eca0b1633148d995317e1";
@@ -65,45 +72,57 @@ public class HomeWork_4_4 extends AppCompatActivity {
         }
 
         protected String doInBackground(Void... urls) {
+            Log.i(TAG, "doInBackground");
             //query recipe list
             //http://food2fork.com/api/search?key={KEY}&q={query string}
             //query recipe detail
             //http://food2fork.com/api/get?key={KEY}&rId={recipe_id}
             //Reference http://food2fork.com/about/api
-            //TODO: Check network status
-            try {
-                URL url = new URL(API_URL + "?key=" + API_KEY);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
+            ConnectivityManager conMgr = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+
+            if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().getState() == NetworkInfo.State.CONNECTED) {
+
+                // notify user you are online
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                    StringBuilder stringBuilder = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line).append("\n");
+                    URL url = new URL(API_URL + "?key=" + API_KEY);
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    try {
+                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                        StringBuilder stringBuilder = new StringBuilder();
+                        String line;
+                        while ((line = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(line).append("\n");
+                        }
+                        bufferedReader.close();
+                        return stringBuilder.toString();
+                    } finally {
+                        urlConnection.disconnect();
                     }
-                    bufferedReader.close();
-                    return stringBuilder.toString();
-                } finally {
-                    urlConnection.disconnect();
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage(), e);
+                    return null;
                 }
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage(), e);
-                return null;
+
+            } else if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().getState() == NetworkInfo.State.DISCONNECTED) {
+                Log.i(TAG, "no connection.");
+                showToast("Please check your network.");
             }
+
+            return null;
         }
 
         protected void onPostExecute(String response) {
             if (response == null) {
-                response = "THERE WAS AN ERROR";
+                response = "THERE WAS AN ERROR. Please check your network.";
+                showToast(response);
+            } else {
+                parseResponse(response);
+                Log.i(TAG, "notifyDataSetChanged");
+                // Notify the adapter, that the data has changed.
+                mAdapter.notifyDataSetChanged();
             }
-
-
-            parseResponse(response);
-            Log.i(TAG, "notifyDataSetChanged");
-            // Notify the adapter, that the data has changed.
-            mAdapter.notifyDataSetChanged();
-
-
         }
 
         public void parseResponse(String response) {
