@@ -33,4 +33,6 @@
     <string name="edit">編輯</string>
     <string name="share">分享</string>
     <string name="delete">刪除</string>
+    <string name="recipe_list">食譜目錄</string>
+    <string name="recipe_detail">食譜內容</string>
 </resources>

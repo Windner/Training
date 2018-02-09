@@ -60,4 +60,6 @@ This volume starts with the first new Beatle song, “Free as a Bird” (based o
     <string name="order_donut" translatable="false">Order Donuts</string>
     <string name="order_froyo" translatable="false">Order Froyo</string>
     <string name="order_icecream" translatable="false">Order IceCream</string>
+    <string name="recipe_detail">Recipe Detail</string>
+    <string name="recipe_list">Recipt List</string>
 </resources>

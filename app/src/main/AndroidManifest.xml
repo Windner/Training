@@ -68,7 +68,10 @@
         <activity
             android:name=".Lesson4_sub.orderIcecream"
             android:parentActivityName=".Lesson4" />
-        <activity android:name=".Lesson4_sub.HomeWork_4_4"></activity>
+        <activity android:name=".Lesson4_sub.HomeWork_4_4" />
+        <activity
+            android:name=".Lesson4_sub.HW_4_4_detail"
+            android:parentActivityName=".Lesson4_sub.HomeWork_4_4"></activity>
     </application>
 
 </manifest>
