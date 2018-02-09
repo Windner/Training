@@ -70,7 +70,7 @@ public class HomeWork_4_4 extends AppCompatActivity {
             //query recipe detail
             //http://food2fork.com/api/get?key={KEY}&rId={recipe_id}
             //Reference http://food2fork.com/about/api
-
+            //TODO: Check network status
             try {
                 URL url = new URL(API_URL + "?key=" + API_KEY);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();

@@ -15,6 +15,8 @@ import com.example.candice_feng.training.R;
 public class HW_4_4_detail extends AppCompatActivity {
     private static final String TAG = HW_4_4_detail.class.getSimpleName();
 
+    //TODO: use query recipe detail and native ui
+    //http://food2fork.com/api/get?key={KEY}&rId={recipe_id}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
