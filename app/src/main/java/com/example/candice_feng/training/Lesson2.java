@@ -3,7 +3,6 @@ package com.example.candice_feng.training;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,15 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Lesson2 extends AppCompatActivity {
-    private static final String TAG = Lesson2.class.getSimpleName();
+public class Lesson2 extends BaseActivity {
+
     private TextView launch_phone;
     static final int SUM_ACTIVITY_REQUEST = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson2);
-        Log.i(TAG, "onCreate");
 
         launch_phone = findViewById(R.id.launch_phone2);
         launch_phone.setOnClickListener(new View.OnClickListener() {
@@ -86,42 +84,6 @@ public class Lesson2 extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        Log.i(TAG, "onPostResume");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy");
     }
 
     public void dialPhoneNumber(String phoneNumber) {

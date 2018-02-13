@@ -1,14 +1,13 @@
 package com.example.candice_feng.training;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.candice_feng.training.Lesson4_sub.*;
 
-public class Lesson4 extends AppCompatActivity {
+public class Lesson4 extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

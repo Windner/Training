@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.candice_feng.training.MainActivity">
+    tools:context="com.example.candice_feng.training.Lesson5">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,37 +13,21 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/hw7_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lesson_one_btn" />
+            android:text="@string/hw7_1_btn_text" />
 
         <Button
+            android:id="@+id/hw7_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lesson_two_btn" />
+            android:text="@string/hw7_2_btn_text" />
 
         <Button
+            android:id="@+id/hw8_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lesson_three_btn"
-            android:text="@string/lesson_three" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lesson_four_btn"
-            android:text="@string/lesson_four" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lesson_five_btn"
-            android:text="@string/lesson_five" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lesson_six_btn"
-            android:text="@string/lesson_six" />
+            android:text="@string/hw8_3_btn_text" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

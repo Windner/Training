@@ -35,4 +35,14 @@
     <string name="delete">刪除</string>
     <string name="recipe_list">食譜目錄</string>
     <string name="recipe_detail">食譜內容</string>
+    <string name="hw7_1_btn_text">作業 7.1</string>
+    <string name="hw7_2_btn_text">作業7.2</string>
+    <string name="lesson_five">第五堂</string>
+    <string name="hw8_3_btn_text">作業 8.3</string>
+    <string name="lesson_six">第六堂</string>
+    <string name="ready_to_start">準備開始</string>
+    <string name="start_task">開始</string>
+    <string name="input_url">輸入網址:</string>
+    <string name="page_resource_appear">頁面資訊將會顯示在這裡</string>
+    <string name="get_page_source">取得頁面資訊</string>
 </resources>

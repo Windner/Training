@@ -1,6 +1,5 @@
 package com.example.candice_feng.training.Lesson4_sub;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,9 +7,10 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.candice_feng.training.BaseActivity;
 import com.example.candice_feng.training.R;
 
-public class HomeWork_4_1 extends AppCompatActivity {
+public class HomeWork_4_1 extends BaseActivity {
     private LinearLayout checkBoxGroup;
 
     @Override

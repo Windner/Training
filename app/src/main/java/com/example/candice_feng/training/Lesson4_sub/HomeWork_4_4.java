@@ -1,17 +1,19 @@
 package com.example.candice_feng.training.Lesson4_sub;
 
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.candice_feng.training.BaseActivity;
 import com.example.candice_feng.training.Model.Recipe;
 import com.example.candice_feng.training.R;
 
@@ -28,8 +30,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HomeWork_4_4 extends AppCompatActivity {
-    private static final String TAG = HomeWork_4_4.class.getSimpleName();
+public class HomeWork_4_4 extends BaseActivity {
     private RecyclerView mRecyclerView;
     private RecipeAdapt mAdapter;
     private final LinkedList<Recipe> mRecipeList = new LinkedList<>();
@@ -38,7 +39,6 @@ public class HomeWork_4_4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_work_4_4);
-        Log.i(TAG, "onCreate");
         getSupportActionBar().setTitle(R.string.recipe_list);
         new RetrieveFeedTask().execute();
 
@@ -47,7 +47,13 @@ public class HomeWork_4_4 extends AppCompatActivity {
 
         //add divider
         mRecyclerView.addItemDecoration(new DividerItemDecoration(
-                this, DividerItemDecoration.VERTICAL));
+                this, DividerItemDecoration.VERTICAL) {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.bottom = 3;
+                super.getItemOffsets(outRect, view, parent, state);
+            }
+        });
 
         // Create an adapter and supply the data to be displayed.
         mAdapter = new RecipeAdapt(this, mRecipeList);

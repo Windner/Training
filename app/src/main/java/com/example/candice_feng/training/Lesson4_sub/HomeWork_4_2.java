@@ -1,6 +1,5 @@
 package com.example.candice_feng.training.Lesson4_sub;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -9,10 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.candice_feng.training.BaseActivity;
 import com.example.candice_feng.training.R;
 
-public class HomeWork_4_2 extends AppCompatActivity {
-    private static final String TAG = HomeWork_4_2.class.getSimpleName();
+public class HomeWork_4_2 extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

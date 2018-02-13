@@ -7,9 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,30 +47,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, Lesson4.class));
             }
         });
+
+        final Button lesson5_btn = findViewById(R.id.lesson_five_btn);
+        lesson5_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lesson5.class));
+            }
+        });
+
+        final Button lesson6_btn = findViewById(R.id.lesson_six_btn);
+        lesson6_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lesson6.class));
+            }
+        });
         Log.i(TAG, "onCreate");
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        Log.i(TAG, "onPostResume");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy");
-    }
 }

@@ -1,10 +1,9 @@
 package com.example.candice_feng.training;
 
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Lesson3_ANR extends AppCompatActivity {
+public class Lesson3_ANR extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
