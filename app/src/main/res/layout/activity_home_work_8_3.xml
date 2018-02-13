@@ -6,4 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.candice_feng.training.Lesson5_sub.HomeWork_8_3">
 
+    <Button
+        android:id="@+id/download_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>
