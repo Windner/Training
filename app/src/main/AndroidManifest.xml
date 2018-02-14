@@ -79,7 +79,12 @@
         <activity android:name=".BaseActivity" />
         <activity android:name=".Lesson5_sub.HomeWork_7_1" />
         <activity android:name=".Lesson5_sub.HomeWork_7_2" />
-        <activity android:name=".Lesson5_sub.HomeWork_8_3"></activity>
+        <activity android:name=".Lesson5_sub.HomeWork_8_3" />
+
+        <service
+            android:name=".Lesson5_sub.HomeWork_8_3$MyJobScheduler"
+            android:enabled="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"></service>
     </application>
 
 </manifest>

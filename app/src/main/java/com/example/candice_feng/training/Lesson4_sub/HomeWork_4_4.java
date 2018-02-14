@@ -68,6 +68,7 @@ public class HomeWork_4_4 extends BaseActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
+
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         private String API_URL = "http://food2fork.com/api/search";
         private String API_KEY = "3ddc7a65c38eca0b1633148d995317e1";
