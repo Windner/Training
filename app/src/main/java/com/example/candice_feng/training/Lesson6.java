@@ -1,7 +1,20 @@
 package com.example.candice_feng.training;
 
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
+import com.example.candice_feng.training.Model.ToDoAdapt;
+import com.example.candice_feng.training.Model.ToDoItem;
+import com.example.candice_feng.training.Model.ToDoItem.TodoDBHelper;
+
+import java.util.LinkedList;
 
 public class Lesson6 extends BaseActivity {
 
@@ -29,21 +42,58 @@ public class Lesson6 extends BaseActivity {
      * 7.When the app is restarted, the latest state of items is visible, which demonstrates that the data was saved and reloaded.
      **/
 
+    private RecyclerView mRecyclerView;
+    private ToDoAdapt mToDoAdapt;
+    private LinkedList<ToDoItem> mToDoList;
+
+    private ImageButton mAddButton;
+    private EditText mTodoContent;
+
+    private TodoDBHelper mDBHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson6);
 
-        //add button setup
+        //editView
+        mTodoContent = findViewById(R.id.todo_content);
 
+        //add button setup
+        mAddButton = findViewById(R.id.add_todoBtn);
+        mAddButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Add item to DB
+                //Data: CheckBox state: false, mTodoContent text, currentTime
+            }
+        });
 
         //set application bar menu
 
         //Add option menu to show completed tasks.
 
+
+        //init DB
+        //sort by create date
+        mDBHelper = new TodoDBHelper(this);
+
         // Create recycler view.
         //Reference Homework 4.4
-        //sort by create date
+        mRecyclerView = findViewById(R.id.todo_listView);
+        //add divider
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL) {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.bottom = 3;
+                super.getItemOffsets(outRect, view, parent, state);
+            }
+        });
+
+        mToDoAdapt = new ToDoAdapt(this, mToDoList);
+        mRecyclerView.setAdapter(mToDoAdapt);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
