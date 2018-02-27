@@ -6,42 +6,48 @@
     android:layout_height="match_parent"
     tools:context="com.example.candice_feng.training.Lesson6">
 
-    <LinearLayout
-        android:layout_height="wrap_content"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/todo_content"
-            android:layout_width="match_parent"
+
+        <LinearLayout
+            android:id="@+id/add_contentLY"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_border_edittext"
-            android:ems="14"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:inputType="textMultiLine" />
-
-        <ImageButton
-            android:id="@+id/add_todoBtn"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="6"
-            android:background="@android:color/transparent"
-            android:paddingHorizontal="0dp"
-            android:paddingVertical="0dp"
-            android:scaleType="fitEnd"
-            android:src="@drawable/ic_add_circle_black_24dp"
-            android:stateListAnimator="?android:attr/selectableItemBackgroundBorderless"
-            android:tint="@android:color/holo_green_light"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/todo_listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="59dp" />
+            <EditText
+                android:id="@+id/todo_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_border_edittext"
+                android:ems="14"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:inputType="textMultiLine" />
 
+            <ImageButton
+                android:id="@+id/add_todoBtn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="6"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="0dp"
+                android:paddingVertical="0dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/ic_add_circle_black_24dp"
+                android:stateListAnimator="?android:attr/selectableItemBackgroundBorderless"
+                android:tint="@android:color/holo_green_light"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/todo_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/add_contentLY" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

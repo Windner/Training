@@ -1,9 +1,9 @@
 package com.example.candice_feng.training.Model;
 
-import android.content.Context;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by MIYAFENG1 on 2018/2/27.
@@ -11,105 +11,99 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ToDoItem {
 
-    //private  int mId;
-    private boolean mCompleted;
-    private String mToDoContent;
-    private String mCreateTime;
-    private String mFinishedTime;
+    private static String TAG = ToDoItem.class.getSimpleName();
 
-    public ToDoItem(String todoContent, String createTime) {
-        this.mCompleted = false;
-        this.mToDoContent = todoContent;
-        //get create here?
-        this.mCreateTime = createTime;
+    public static int STATE_ONGOING = 0;
+    public static int STATE_COMPLETEED = 1;
+
+    private long _Id;
+    private int _State;
+    private String _Content;
+    private Date _CreateTime;
+    private Date _FinishedTime;
+
+    public ToDoItem(String todoContent) {
+        this._State = STATE_ONGOING;
+        this._Content = todoContent;
+        this._CreateTime = new Date();
     }
 
-    public void setCompleted(boolean bCompleted) {
-        this.mCompleted = bCompleted;
+    public ToDoItem(int id, int state, String content, int createTime, int finishedTime) {
+        this._Id = id;
+        this._State = state;
+        this._Content = content;
+        this._CreateTime = new Date(createTime);
+        this._FinishedTime = new Date(finishedTime);
     }
 
-    public void setTodoContent(String todoContent) {
-        this.mToDoContent = todoContent;
+    public ToDoItem() {
     }
 
-    public void setFinishedTime(String time) {
-        //set finish time directly?
-        this.mFinishedTime = time;
+    //getting ID
+    public long getID() {
+        return this._Id;
     }
 
-    public boolean getCompleted() {
-        return this.mCompleted;
+    //getting State
+    public int getState() {
+        return this._State;
     }
 
-    public String getToDoContent() {
-        return this.mToDoContent;
+    //getting Content
+    public String getContent() {
+        return this._Content;
     }
 
-    public String getCreateTime() {
-        return this.mCreateTime;
+    //getting CreateTime
+    public Date getCreateTime() {
+        return this._CreateTime;
     }
 
-    public String getFinishedTime() {
-        return this.mFinishedTime;
+    //getting FinishTime
+    public Date getFinishedTime() {
+        return this._FinishedTime;
     }
 
-    public class TodoDBHelper extends SQLiteOpenHelper {
+    //setting ID
+    public void setID(long id) {
+        this._Id = id;
+    }
 
-        //DB...
+    //setting State
+    public void setState(int state) {
+        this._State = state;
+    }
 
-        public static final int DATABASE_VERSION = 1;
-        public static final String DATABASE_NAME = "ToDo.db";
-        public static final String TODO_LIST_TABLE = "todo_entries";
+    //setting Content
+    public void setContent(String content) {
+        this._Content = content;
+    }
 
-        //Column
-        public static final String KEY_ID = "_id";
-        public static final String KEY_STATUS = "completed_status";
-        public static final String KEY_CONTENT = "content";
-        public static final String KEY_CREATE_DATE = "create_date";
-        public static final String KEY_FINISHED_DATE = "finished_date";
+    //setting CreateTime
+    public void setCreateTime(long time) {
+        if (this._CreateTime == null)
+            this._CreateTime = new Date(time);
+        else
+            Log.i(TAG, "CreateTime is exist.");
+    }
 
-        //String array if columns
-        /*
-        private static final String[] COLUMNS = {
-                KEY_ID,
-                KEY_STATUS,
-                KEY_CONTENT,
-                KEY_CREATE_DATE,
-                KEY_FINISHED_DATE };
-                */
+    //setting FinishTime
+    public void setFinishedTime(long time) {
+        if (this._FinishedTime == null)
+            this._FinishedTime = new Date(time);
+        else
+            Log.i(TAG, "FinishedTime is exist.");
+    }
 
-        private static final String TEXT_TYPE = " TEXT";
-        private static final String INTEGER_TYPE = " INTEGER";
-        private static final String DATETIME_TYPE = " DATETIME";
-        private static final String COMMA_SEP = ",";
-        private static final String SQL_CREATE_ENTRIES =
-                "CREATE TABLE " + TODO_LIST_TABLE + " (" +
-                        KEY_ID + " INTEGER PRIMARY KEY," +
-                        KEY_STATUS + INTEGER_TYPE + " DEFAULT 0" + COMMA_SEP +
-                        KEY_CONTENT + TEXT_TYPE + COMMA_SEP +
-                        KEY_CREATE_DATE + DATETIME_TYPE + " DEFAULT CURRENT_TIMESTAMP" + COMMA_SEP  +
-                        KEY_FINISHED_DATE + DATETIME_TYPE + " DEFAULT NELL" +
-                        " )";
-
-        public TodoDBHelper(Context context) {
-            super(context,DATABASE_NAME, null, DATABASE_VERSION);
+    //set Completed
+    public void setCompleted(boolean isCompleted) {
+        if (isCompleted) {
+            this._State = STATE_COMPLETEED;
+            Date now = new Date();
+            this.setFinishedTime(now.getTime());
+        } else {
+            this._State = STATE_ONGOING;
+            this._FinishedTime = null;
         }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(SQL_CREATE_ENTRIES);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // This database is only a cache for online data, so its upgrade policy is
-            // to simply to discard the data and start over
-            db.execSQL("DROP TABLE IF EXISTS " + TODO_LIST_TABLE);
-
-            onCreate(db);
-        }
-
-
     }
-
 }

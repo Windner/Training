@@ -6,13 +6,17 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.candice_feng.training.Lesson5_sub.HomeWork_7_2;
 import com.example.candice_feng.training.Model.ToDoAdapt;
 import com.example.candice_feng.training.Model.ToDoItem;
-import com.example.candice_feng.training.Model.ToDoItem.TodoDBHelper;
+import com.example.candice_feng.training.Util.ToDoDBHelper;
 
 import java.util.LinkedList;
 
@@ -49,12 +53,16 @@ public class Lesson6 extends BaseActivity {
     private ImageButton mAddButton;
     private EditText mTodoContent;
 
-    private TodoDBHelper mDBHelper;
+    private ToDoDBHelper mDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson6);
+
+        //init DB
+        //sort by create date
+        mDBHelper = new ToDoDBHelper(this);
 
         //editView
         mTodoContent = findViewById(R.id.todo_content);
@@ -66,6 +74,19 @@ public class Lesson6 extends BaseActivity {
             public void onClick(View v) {
                 //Add item to DB
                 //Data: CheckBox state: false, mTodoContent text, currentTime
+                String content = mTodoContent.getText().toString();
+                if (TextUtils.isEmpty(content))
+                    mDBHelper.addTodo(new ToDoItem(content));
+                else
+                    Log.i(TAG, "Todo item is empty, fail to add item.");
+
+                //update ui
+                mToDoAdapt.notifyDataSetChanged();
+                mTodoContent.setText("");
+                //hide soft keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(HomeWork_7_2.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
             }
         });
 
@@ -74,9 +95,7 @@ public class Lesson6 extends BaseActivity {
         //Add option menu to show completed tasks.
 
 
-        //init DB
-        //sort by create date
-        mDBHelper = new TodoDBHelper(this);
+
 
         // Create recycler view.
         //Reference Homework 4.4
@@ -91,11 +110,20 @@ public class Lesson6 extends BaseActivity {
             }
         });
 
-        mToDoAdapt = new ToDoAdapt(this, mToDoList);
+        mToDoAdapt = new ToDoAdapt(this, mDBHelper);
         mRecyclerView.setAdapter(mToDoAdapt);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mToDoAdapt.setOnItemClickListener(new ToDoAdapt.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, ToDoItem item) {
+                Log.i(TAG, item.getContent() + "had been clicked.");
+            }
+        });
 
+    }
 
+    public void updateAdapt() {
+        mToDoAdapt.notifyDataSetChanged();
     }
 }
 
