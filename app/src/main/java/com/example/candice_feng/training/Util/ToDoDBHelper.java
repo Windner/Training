@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.candice_feng.training.Model.ToDoItem;
 
+import java.security.cert.Extension;
 import java.util.LinkedList;
 
 import static java.lang.Math.toIntExact;
@@ -46,7 +47,6 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
 
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
-    private static final String DATETIME_TYPE = " DATETIME";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TODO_LIST_TABLE + " (" +
@@ -61,13 +61,30 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
     private static final String SQL_QUERY_ALL_ITEMS = "SELECT * FROM " +
             TODO_LIST_TABLE;
 
+    private static final String SQL_QUERY_ALL_ONGOING_ITEMS = "SELECT * FROM " +
+            TODO_LIST_TABLE + " WHERE " + KEY_STATUS + " IS " + ToDoItem.STATE_ONGOING +
+            " ORDER BY " + KEY_CREATE_DATE + " DESC ";
+
+    private static final String SQL_QUERY_ALL_COMPLELETED_ITEMS = "SELECT * FROM " +
+            TODO_LIST_TABLE + " WHERE " + KEY_STATUS + " IS " + ToDoItem.STATE_COMPLETEED;
+
     private SQLiteDatabase mWritableDB;
     private SQLiteDatabase mReadableDB;
 
-    public ToDoDBHelper(Context context) {
+    private static ToDoDBHelper mInstance = null;
+    private Context mContext;
+
+    private ToDoDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.mContext = context;
     }
 
+    public static ToDoDBHelper getmInstance(Context context) {
+        if (mInstance == null) {
+            mInstance = new ToDoDBHelper(context.getApplicationContext());
+        }
+        return mInstance;
+    }
     // Create Table
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -86,7 +103,7 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
     /**
      * Add new ToDo item
      */
-    public void addTodo(ToDoItem item) {
+    public ToDoItem addTodo(ToDoItem item) {
         ContentValues values = new ContentValues();
         values.put(KEY_STATUS, item.getState());
         values.put(KEY_CONTENT, item.getContent());
@@ -96,12 +113,15 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
+            long id = 0;
             //Insert
-            mWritableDB.insert(TODO_LIST_TABLE, null, values);
-
+            id = mWritableDB.insert(TODO_LIST_TABLE, null, values);
+            item.setID(id);
+            return item;
         } catch (Exception e) {
-            Log.d(TAG, "INSERT EXCEPTION! " + e.getMessage());
+            Log.e(TAG, "INSERT EXCEPTION! " + e.getMessage());
         }
+        return null;
     }
 
     /**
@@ -109,7 +129,7 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
      */
     public ToDoItem getTodoItem(int position) {
         String SQL_QUERY_SINGLE_ITEM = "SELECT * FROM " +
-                TODO_LIST_TABLE + " ORDER BY " + KEY_CREATE_DATE + " DESC " +
+                TODO_LIST_TABLE + " WHERE " + KEY_STATUS + " IS NOT 1" + " ORDER BY " + KEY_CREATE_DATE + " DESC " +
                 " LIMIT " + position + ",1";
         ToDoItem item = new ToDoItem();
         Cursor cursor = null;
@@ -140,13 +160,23 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
     /**
      * Get All items
      */
-    public LinkedList<ToDoItem> getAllItems() {
+    public LinkedList<ToDoItem> getAllItems(int state) {
         LinkedList<ToDoItem> list = new LinkedList<>();
         Cursor cursor = null;
         try {
             if (mWritableDB == null)
                 mWritableDB = getWritableDatabase();
-            cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_ITEMS, null);
+            switch (state) {
+                case 0:
+                    cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_ONGOING_ITEMS, null);
+                    break;
+                case 1:
+                    cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_COMPLELETED_ITEMS, null);
+                    break;
+                default:
+                    cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_ITEMS, null);
+                    break;
+            }
 
             if (cursor.moveToFirst()) {
                 do {
@@ -174,21 +204,59 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
     /**
      * Get item total count
      */
-    public int getcount() {
+    public int getCount() {
         if (mReadableDB == null) {
             mReadableDB = getReadableDatabase();
         }
         return toIntExact(DatabaseUtils.queryNumEntries(mReadableDB, TODO_LIST_TABLE));
     }
 
-    // Update Single item
-    public void updateItemState(ToDoItem item) {
+    public int getCount(int state) {
+        Cursor cursor = null;
+        int count = 0;
+        try {
+            if (mWritableDB == null)
+                mWritableDB = getWritableDatabase();
+            switch (state) {
+                case 0:
+                    cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_ONGOING_ITEMS, null);
+                    break;
+                case 1:
+                    cursor = mWritableDB.rawQuery(SQL_QUERY_ALL_COMPLELETED_ITEMS, null);
+                    break;
+                default:
+                    Log.i(TAG, "Unexpected!");
+                    break;
+            }
+
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        } finally {
+            count = cursor.getCount();
+            cursor.close();
+            return count;
+        }
+    }
+
+    // Update Single item state
+    public void updateItem(ToDoItem item, String field) {
         try {
             if (mWritableDB == null) {
                 mWritableDB = getWritableDatabase();
             }
             ContentValues values = new ContentValues();
-            values.put(KEY_STATUS, item.getState());
+            switch (field) {
+                case KEY_STATUS:
+                    values.put(KEY_STATUS, item.getState());
+                    values.put(KEY_FINISHED_DATE, item.getFinishedTime().getTime());
+                    break;
+                case KEY_CONTENT:
+                    values.put(KEY_CONTENT, item.getContent());
+                    break;
+                default:
+                    Log.i(TAG, "Not Expected field.");
+            }
+
             mWritableDB.update(TODO_LIST_TABLE,
                     values,
                     KEY_ID + " = ?",
@@ -197,6 +265,32 @@ public class ToDoDBHelper extends SQLiteOpenHelper {
             Log.d(TAG, "UPDATE EXCEPTION! " + e.getMessage());
         }
     }
+
+    //update items
+    public void UpdateItems(LinkedList<ToDoItem> list) {
+        try {
+            if (mWritableDB == null) {
+                mWritableDB = getWritableDatabase();
+            }
+            mWritableDB.beginTransaction();
+            for (int i = 0; i < list.size(); i++) {
+                ToDoItem item = list.get(i);
+                ContentValues value = new ContentValues();
+                value.put(KEY_ID, item.getID());
+                value.put(KEY_STATUS, item.getState());
+                value.put(KEY_CONTENT, item.getContent());
+                value.put(KEY_CREATE_DATE, item.getCreateTime().getTime());
+                value.put(KEY_FINISHED_DATE, item.getFinishedTime().getTime());
+                mWritableDB.replace(TODO_LIST_TABLE, null, value);
+            }
+            mWritableDB.setTransactionSuccessful();
+            Log.i(TAG, "UpdateItems finished.");
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+        mWritableDB.endTransaction();
+    }
+
     // Delete Single item
 
     // Close db

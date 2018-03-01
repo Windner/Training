@@ -43,7 +43,7 @@ public class HomeWork_8_3 extends BaseActivity {
     static Context mContext;
 
 
-    static class MyJobScheduler extends JobService {
+    public static class MyJobScheduler extends JobService {
         private final String SERVICE_TAG = MyJobScheduler.class.getSimpleName();
 
         public MyJobScheduler() {

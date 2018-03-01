@@ -89,10 +89,7 @@ public class ToDoItem {
 
     //setting FinishTime
     public void setFinishedTime(long time) {
-        if (this._FinishedTime == null)
-            this._FinishedTime = new Date(time);
-        else
-            Log.i(TAG, "FinishedTime is exist.");
+        this._FinishedTime = new Date(time);
     }
 
     //set Completed
@@ -103,7 +100,9 @@ public class ToDoItem {
             this.setFinishedTime(now.getTime());
         } else {
             this._State = STATE_ONGOING;
-            this._FinishedTime = null;
+            //Update db will fail if set time to null
+            this._FinishedTime = new Date(0);
+
         }
     }
 }

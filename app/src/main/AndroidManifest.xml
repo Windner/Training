@@ -74,7 +74,13 @@
             android:name=".Lesson4_sub.HW_4_4_detail"
             android:parentActivityName=".Lesson4_sub.HomeWork_4_4" />
         <activity android:name=".Lesson5" />
-        <activity android:name=".Lesson6" />
+        <activity
+            android:name=".Lesson6"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.candice_feng.training.MainActivity" />
+        </activity>
         <activity android:name=".Lesson7" />
         <activity android:name=".BaseActivity" />
         <activity android:name=".Lesson5_sub.HomeWork_7_1" />
@@ -84,7 +90,15 @@
         <service
             android:name=".Lesson5_sub.HomeWork_8_3$MyJobScheduler"
             android:enabled="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"></service>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name=".Lesson6_completedList"
+            android:parentActivityName=".Lesson6">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.candice_feng.training.Lesson6" />
+        </activity>
     </application>
 
 </manifest>
