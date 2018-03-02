@@ -63,6 +63,14 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, Lesson6.class));
             }
         });
+
+        final Button lesson7_btn = findViewById(R.id.lesson_seven_btn);
+        lesson7_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Lesson7.class));
+            }
+        });
         Log.i(TAG, "onCreate");
     }
 

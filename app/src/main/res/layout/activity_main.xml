@@ -45,5 +45,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/lesson_six_btn"
             android:text="@string/lesson_six" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lesson_seven_btn"
+            android:text="@string/lesson_seven" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

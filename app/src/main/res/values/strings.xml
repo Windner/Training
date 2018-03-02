@@ -67,7 +67,7 @@ This volume starts with the first new Beatle song, “Free as a Bird” (based o
     <string name="lesson_five">Lesson Five</string>
     <string name="hw8_3_btn_text">HomeWork 8.3</string>
     <string name="lesson_six">Lesson Six</string>
-    <string name="ready_to_start">我準備好開始工作了</string>
+    <string name="ready_to_start">Ready to Start</string>
     <string name="start_task">Start Task</string>
     <string name="napping" translatable="false">Napping</string>
     <string name="input_url">Enter URL:</string>
@@ -76,4 +76,5 @@ This volume starts with the first new Beatle song, “Free as a Bird” (based o
     <string name="http_item" translatable="false">http://</string>
     <string name="https_item" translatable="false">https://</string>
     <string name="download_now_btn">Download Now</string>
+    <string name="lesson_seven">Lesson Seven</string>
 </resources>
