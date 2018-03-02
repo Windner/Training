@@ -96,7 +96,7 @@ public class Lesson6 extends BaseActivity {
             }
         });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setupRecyclerView();
 
     }
@@ -139,6 +139,17 @@ public class Lesson6 extends BaseActivity {
         });
 
         mToDoAdapt = new ToDoAdapt(this, mToDoList, ToDoAdapt.TYPE_ONGOING);
+        mToDoAdapt.setViewListener(new ToDoAdapt.ViewListener() {
+            @Override
+            public void onItemClick(int position, ToDoItem item) {
+                mDBHelper.updateItem(item, mDBHelper.KEY_CONTENT);
+            }
+
+            @Override
+            public void onCheckedChanged(int pos, ToDoItem item, boolean isChecked) {
+                mDBHelper.updateItem(item, mDBHelper.KEY_STATUS);
+            }
+        });
         mRecyclerView.setAdapter(mToDoAdapt);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

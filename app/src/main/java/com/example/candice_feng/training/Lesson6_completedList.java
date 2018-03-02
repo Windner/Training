@@ -50,7 +50,7 @@ public class Lesson6_completedList extends AppCompatActivity {
         });
 
         mCompletedList = ToDoDBHelper.getmInstance(this).getAllItems(ToDoItem.STATE_COMPLETEED);
-        mToDoAdapt = new ToDoAdapt(this, mCompletedList, ToDoAdapt.TTYPE_COMPLETED);
+        mToDoAdapt = new ToDoAdapt(this, mCompletedList, ToDoAdapt.TYPE_COMPLETED);
         mRecyclerView.setAdapter(mToDoAdapt);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

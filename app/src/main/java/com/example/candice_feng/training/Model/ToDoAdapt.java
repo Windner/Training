@@ -29,12 +29,13 @@ import java.util.List;
 
 public class ToDoAdapt extends RecyclerView.Adapter<ToDoAdapt.ToDoViewHolder> {
     public static int TYPE_ONGOING = 0;
-    public static int TTYPE_COMPLETED = 1;
+    public static int TYPE_COMPLETED = 1;
 
     private static final String TAG = ToDoAdapt.class.getSimpleName();
     private final LinkedList<ToDoItem> mTodoList;
     private final LayoutInflater mInflater;
 
+    private ViewListener listener;
     private RecyclerView mRecyclerView;
     private int mListType;
 
@@ -63,17 +64,23 @@ public class ToDoAdapt extends RecyclerView.Adapter<ToDoAdapt.ToDoViewHolder> {
                         if (!hasFocus) {
                             //update item
                             final int pos = getAdapterPosition();
-                            ToDoItem item = mTodoList.get(pos);
-                            item.setContent(mEditView.getText().toString());
+                            if (pos >= 0) {
+                                ToDoItem item = mTodoList.get(pos);
+                                item.setContent(mEditView.getText().toString());
 
-                            mTodoList.set(pos, item);
+                                mTodoList.set(pos, item);
 
-                            //change edit view to text view
-                            mEditView.setVisibility(View.GONE);
-                            mToDoContent.setVisibility(View.VISIBLE);
+                                //change edit view to text view
+                                mEditView.setVisibility(View.GONE);
+                                mToDoContent.setVisibility(View.VISIBLE);
 
-                            //update ui
-                            updateItemLayout(pos);
+                                if (listener != null) {
+                                    listener.onItemClick(pos, item);
+                                }
+                                //update ui
+                                updateItemLayout(pos);
+                            }
+
                         }
                     }
                 });
@@ -98,6 +105,9 @@ public class ToDoAdapt extends RecyclerView.Adapter<ToDoAdapt.ToDoViewHolder> {
                 item.setCompleted(isChecked);
                 //mDB.updateItem(item, mDB.KEY_STATUS);
                 mTodoList.set(pos, item);
+                if (listener != null) {
+                    listener.onCheckedChanged(pos, item, isChecked);
+                }
                 updateItemLayout(pos);
             }
         }
@@ -141,6 +151,10 @@ public class ToDoAdapt extends RecyclerView.Adapter<ToDoAdapt.ToDoViewHolder> {
         Log.i(TAG, "ToDoList");
         this.mTodoList = list;
         this.mListType = type;
+    }
+
+    public void setViewListener(ViewListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -225,4 +239,9 @@ public class ToDoAdapt extends RecyclerView.Adapter<ToDoAdapt.ToDoViewHolder> {
 
     }
 
+    public interface ViewListener {
+        void onItemClick(int position, ToDoItem item);
+
+        void onCheckedChanged(int pos, ToDoItem item, boolean isChecked);
+    }
 }

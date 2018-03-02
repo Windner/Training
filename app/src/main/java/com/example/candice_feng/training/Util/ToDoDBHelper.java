@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.example.candice_feng.training.Model.ToDoItem;
 
-import java.security.cert.Extension;
 import java.util.LinkedList;
 
 import static java.lang.Math.toIntExact;
