@@ -14,12 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.candice_feng.training.Model.ToDoAdapt;
-import com.example.candice_feng.training.Model.ToDoItem;
 import com.example.candice_feng.training.dummy.ContactAdapter;
-
-import java.util.LinkedList;
 import java.util.List;
 
 public class Lesson7 extends BaseActivity {
