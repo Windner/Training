@@ -46,7 +46,11 @@ public class Lesson7 extends BaseActivity {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
+                //Toast.makeText(this, "Please go to settings to enable permission for read contacts.", Toast.LENGTH_SHORT).show();
 
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_CONTACTS},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             } else {
 
                 // No explanation needed; request the permission
@@ -57,7 +61,7 @@ public class Lesson7 extends BaseActivity {
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
-                Toast.makeText(this, "Please enable permission for read contacts.", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Please enable permission for read contacts.", Toast.LENGTH_SHORT).show();
 
             }
         } else {
@@ -90,7 +94,7 @@ public class Lesson7 extends BaseActivity {
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(this, "Please enable permission for read contacts.", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "Please enable permission for read contacts.", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
